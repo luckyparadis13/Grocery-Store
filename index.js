@@ -19,66 +19,104 @@ const inventory = [
   { id: 8, name: "sourdough", price: 5.5, category: "grains", quantity: 81 },
 ];
 
-// === Complete the functions below! ===
-
 /**
  * Prints out the name of each item in the given array.
  * @param {Item[]} items - array of items
  */
-function logNames(items) {
-  // TODO: use `forEach`
-}
+const logNames = (items) => {
+  items.forEach((item) => {
+    console.log(item.name);
+  });
+};
 
 /**
+ * Returns an array of item names in all uppercase.
  * @param {Item[]} items - array of items
- * @returns {string[]} an array of item names in all uppercase
+ * @returns {string[]}
  */
-function getUppercaseNames(items) {
-  // TODO: use `map`
-}
+const getUppercaseNames = (items) => {
+  return items.map((item) => item.name.toUpperCase());
+};
 
 /**
+ * Returns the item with the given id.
  * @param {Item[]} items - array of items
  * @param {number} id - id of the item to find
- * @returns {Item} - the item in `items` with the given `id`
+ * @returns {Item}
  */
-function getItemById(items, id) {
-  // TODO: use `find`
-}
+const getItemById = (items, id) => {
+  return items.find((item) => item.id === id);
+};
 
 /**
+ * Returns the price of an item by its name.
  * @param {Item[]} items - array of items
  * @param {string} name - name of the item to find
- * @returns {number} the price of the item named `name` if found
+ * @returns {number|null}
  */
-function getItemPriceByName(items, name) {
-  // TODO: use a loop!
-}
+const getItemPriceByName = (items, name) => {
+  for (const item of items) {
+    if (item.name === name) {
+      return item.price;
+    }
+  }
+  return null; // Always return something (null if not found)
+};
 
 /**
+ * Returns all items that belong to the given category.
  * @param {Item[]} items - array of items
  * @param {string} category
- * @returns {Item[]} array of items that belong to the given `category`
+ * @returns {Item[]}
  */
-function getItemsByCategory(items, category) {
-  // TODO: use `filter`
-}
+const getItemsByCategory = (items, category) => {
+  return items.filter((item) => item.category === category);
+};
 
 /**
+ * Returns the total quantity of all items.
  * @param {Item[]} items - array of items
- * @returns {number} the total quantity of all items
+ * @returns {number}
  */
-function countItems(items) {
-  // TODO: use `reduce`
-}
+const countItems = (items) => {
+  return items.reduce(
+    (totalQuantity, item) => totalQuantity + item.quantity,
+    0
+  );
+};
 
 /**
+ * Returns the total price of all items in inventory.
  * @param {Item[]} items - array of items
- * @returns {number} the cost of all given items
+ * @returns {number}
  */
-function getTotalPrice(items) {
-  // TODO: use `reduce`
-}
+const getTotalPrice = (items) => {
+  return items.reduce(
+    (totalPrice, item) => totalPrice + item.price * item.quantity,
+    0
+  );
+};
+
+/**
+ * Displays the full inventory list on the web page.
+ * @param {Item[]} items - array of items
+ */
+const displayInventory = (items) => {
+  const displayDiv = document.getElementById("inventoryDisplay");
+  displayDiv.innerHTML = "";
+
+  const ul = document.createElement("ul");
+
+  items.forEach((item) => {
+    const li = document.createElement("li");
+    li.textContent = `${item.name} (${item.category}) - $${item.price.toFixed(
+      2
+    )} each, Quantity: ${item.quantity}`;
+    ul.appendChild(li);
+  });
+
+  displayDiv.appendChild(ul);
+};
 
 // === READ BUT DO NOT CHANGE THE CODE BELOW ===
 
